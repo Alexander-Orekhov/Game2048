@@ -16,9 +16,11 @@ public class GameHelper {
             if (value != null) {
                 if ((i + 1) != listSize) {
                     for (int j = i + 1; j < listSize; j++) {
-                        if (list.get(j) != null && value.equals(list.get(j))) {
-                            value = value * 2;
-                            list.set(j, null);
+                        if (list.get(j) != null) {
+                            if (value.equals(list.get(j))) {
+                                value = value * 2;
+                                list.set(j, null);
+                            }
                             break;
                         }
                     }

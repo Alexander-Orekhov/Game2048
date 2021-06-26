@@ -8,7 +8,7 @@ public interface Game {
 
     boolean move(Direction direction);
 
-    void addItem();
+    void addItem() throws NotEnoughSpace;
 
     Board getGameBoard();
 

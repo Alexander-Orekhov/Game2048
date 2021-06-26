@@ -9,7 +9,7 @@ import static java.util.Arrays.asList;
 public class Game2048Test {
     private final static Game game = new Game2048();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotEnoughSpace {
         Board<Key, String> b2 = new SquareBoard<>(1);
         b2.fillBoard(asList("hello"));
         if (!"hello".equals(b2.getValue(b2.getKey(0, 0)))) throw new RuntimeException("board not work =(");

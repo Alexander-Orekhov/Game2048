@@ -13,10 +13,15 @@ public class SquareBoard<V> extends Board<Key, V> {
 
     @Override
     public void fillBoard(List<V> list) {
+        if (list.size() > (height * weigh)) {
+            throw new RuntimeException();
+        }
         Iterator<V> iterator = list.iterator();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < weigh; j++) {
-                board.put(new Key(i, j), iterator.next());
+                if (iterator.hasNext()) {
+                    board.put(new Key(i, j), iterator.next());
+                }
             }
         }
     }
@@ -24,11 +29,13 @@ public class SquareBoard<V> extends Board<Key, V> {
     @Override
     public List<Key> availableSpace() {
         List<Key> space = new ArrayList<>();
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < weigh; j++) {
-                Key key = new Key(i, j);
-                if (Objects.isNull(board.get(key))) {
-                    space.add(getKey(i, j));
+        if (!board.isEmpty()) {
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < weigh; j++) {
+                    Key key = new Key(i, j);
+                    if (Objects.isNull(board.get(key))) {
+                        space.add(getKey(i, j));
+                    }
                 }
             }
         }
@@ -37,7 +44,7 @@ public class SquareBoard<V> extends Board<Key, V> {
 
     @Override
     public void addItem(Key key, V value) {
-        board.put(key, value);
+        board.put(getKey(key.i, key.j), value);
     }
 
     @Override
