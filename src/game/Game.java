@@ -1,10 +1,12 @@
+package game;
+
 public interface Game {
 
     void init();
 
     boolean canMove();
 
-    boolean move();
+    boolean move(Direction direction);
 
     void addItem();
 

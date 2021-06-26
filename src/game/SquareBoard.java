@@ -1,6 +1,9 @@
+package game;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class SquareBoard<V> extends Board<Key, V> {
 
@@ -10,25 +13,26 @@ public class SquareBoard<V> extends Board<Key, V> {
 
     @Override
     public void fillBoard(List<V> list) {
-        Iterator iterator = list.iterator();
+        Iterator<V> iterator = list.iterator();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < weigh; j++) {
-                board.put(new Key(i, j), (V) iterator.next());
+                board.put(new Key(i, j), iterator.next());
             }
         }
     }
 
     @Override
     public List<Key> availableSpace() {
-        List<Key> availableSpace = new ArrayList<>();
+        List<Key> space = new ArrayList<>();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < weigh; j++) {
-                if (board.get(new Key(i, j)).equals(null)) {
-                    availableSpace.add(new Key(i, j));
+                Key key = new Key(i, j);
+                if (Objects.isNull(board.get(key))) {
+                    space.add(getKey(i, j));
                 }
             }
         }
-        return new ArrayList<>();
+        return space;
     }
 
     @Override
@@ -38,7 +42,13 @@ public class SquareBoard<V> extends Board<Key, V> {
 
     @Override
     public Key getKey(int i, int j) {
-        return new Key(i, j);
+        Key result = null;
+        for (Key key : board.keySet()) {
+            if (key.equals(new Key(i, j))) {
+                result = key;
+            }
+        }
+        return result;
     }
 
     @Override
@@ -61,7 +71,7 @@ public class SquareBoard<V> extends Board<Key, V> {
         for (int j = 0; j < weigh; j++) {
             row.add(new Key(i, j));
         }
-        return null;
+        return row;
     }
 
     @Override

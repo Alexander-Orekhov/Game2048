@@ -1,10 +1,12 @@
-import com.sun.javafx.scene.control.skin.VirtualFlow;
+package game;
 
 import java.util.*;
 
-public abstract class Board<K, V>{
+public abstract class Board<K, V> {
+
     int weigh;
     int height;
+
     Map<K, V> board = new HashMap<>();
 
     public Board(int weigh, int height) {
