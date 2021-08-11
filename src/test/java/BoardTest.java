@@ -1,4 +1,3 @@
-package tests;
 
 import game.Board;
 import game.SquareBoard;
